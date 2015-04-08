@@ -9,12 +9,11 @@ var outer = function(){
 //Above you're given a function that returns another function which has a closure over the name variable.
 //Invoke outer saving the return value into another variable called 'inner'.
 
-  //Code Here
+var inner = outer();
 
 //Once you do that, invoke inner.
 
-  //Code Here
-
+inner;
 
 
 //Next problem
@@ -23,16 +22,17 @@ var outer = function(){
 
 var callFriend = function(){
   var friend = 'Jake';
-  function callF(number){
+  return function callF(number){
     return 'Calling ' + friend + ' at ' + number;
   }
-  return callF;
 };
 
 //Above you're given a callFriend function that returns another function.
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
-  //Code Here
+var inner2 = callFriend();
+
+inner2('435-215-9248');
 
 
 
@@ -44,12 +44,20 @@ var callFriend = function(){
   Write a function called makeCounter that makes the following code work properly.
 */
 
-  //Code Here
+//MY CODE//
+var makeCounter = function() {
+  var num = 0;
+  return function(){
+    num++;
+    return num;
+  }
+};
+
   var count = makeCounter();
-  count() // 1
-  count() // 2
-  count() // 3
-  count() // 4
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 
 
@@ -63,7 +71,25 @@ var callFriend = function(){
   Once completed, add a second arguments that allows the function to be invoked N number of times.
   After the function has been called N number of times, console.log('STAHHP');
 */
+var myFunction = function(counter, num) {
+  if (counter <= num) {
+    alert("This is iteration:" + counter);
+  }
+  else {
+    console.log("STAHHP");
+  }
+};
 
+var outer = function(aFunction, num){
+  var counter = 0;
+  return function() {
+    counter++;
+    aFunction(counter, num);
+  }
+};
 
-
+var newCount = outer(myFunction, 2);
+newCount();
+newCount();
+newCount();
 
